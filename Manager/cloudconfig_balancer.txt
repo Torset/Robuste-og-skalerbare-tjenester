@@ -1,0 +1,8 @@
+#cloud-config
+
+runcmd:
+ - apt-get update && apt-get upgrade
+ - apt-get install -y haproxy net-tools
+ - rm /etc/haproxy/haproxy.cfg
+ - wget https://raw.githubusercontent.com/Torset/Robuste-og-skalerbare-tjenester/main/haproxy.cfg -P /etc/haproxy/
+ - service haproxy restart

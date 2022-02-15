@@ -1,0 +1,12 @@
+#cloud-config
+
+runcmd:
+ - apt-get update && apt-get upgrade
+ - apt-get install -y docker.io
+ - apt-get install -y net-tools
+ - wget https://raw.githubusercontent.com/Torset/Robuste-og-skalerbare-tjenester/main/Dockerfile -P /home/ubuntu
+ - docker build -t docker-webserver:1.0 /home/ubuntu
+ - myip=$(ifconfig ens3 | grep netmask | awk '{ print $2 }')
+ - docker run --name=memcache -p 11211:11211 -d memcached memcached -m 512
+ - docker run -p 49153:80 --restart always --name=docker_webserver1 -e BF_MEMCACHE_SERVER=$myip -d docker-webserver:1.0 /usr/sbin/apache2ctl -D FOREGROUND
+ - docker run -p 49154:80 --restart always --name=docker_webserver2 -e BF_MEMCACHE_SERVER=$myip -d docker-webserver:1.0 /usr/sbin/apache2ctl -D FOREGROUND
