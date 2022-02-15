@@ -2,7 +2,7 @@ FROM ubuntu:20.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 RUN ["apt-get", "update", "-y"]
-RUN ["apt-get", "install", "-y", "apache2", "libapache2-mod-php", "git", "unzip", "php-pgsql", "wget2", "php-memcache"]
+RUN ["apt-get", "install", "-y", "apache2", "libapache2-mod-php", "git", "unzip", "php-pgsql", "wget2", "php-memcache", "net-tools"]
 
 WORKDIR /
 RUN git clone https://git.cs.oslomet.no/kyrre.begnum/bookface.git
