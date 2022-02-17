@@ -15,6 +15,6 @@ if ( getenv("BF_MEMCACHE_SERVER")){
    $memcache_server = getenv("BF_MEMCACHE_SERVER");
    $memcache_enabled = 1;
 }
-
+$use_fast_random_search = 1;
 
 ?>
