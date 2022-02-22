@@ -1,3 +1,7 @@
+#!/bin/bash
+
+cockroach sql --insecure --host=localhost:26257
+
 CREATE DATABASE bf;
 CREATE USER t2user;
 GRANT ALL ON DATABASE bf TO t2user;
